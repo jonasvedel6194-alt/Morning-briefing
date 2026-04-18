@@ -47,11 +47,22 @@ Score 0-10. Score 0 if not about this topic at all. Be strict."""
 
 def filter_and_rank(articles):
     results = {}
+    used_urls = set()
+
     for topic in TOPICS:
         print(f"  Scoring articles for topic: {topic['name']}")
-        scored = _score_articles_for_topic(articles, topic)
+
+        # Only consider articles not already assigned to a previous topic
+        available = [a for a in articles if a["url"] not in used_urls]
+        scored = _score_articles_for_topic(available, topic)
         scored.sort(key=lambda x: x[1], reverse=True)
         top = [article for article, score in scored[:topic["max_articles"]]]
+
+        # Lock these URLs so they can't appear in later topics
+        for article in top:
+            used_urls.add(article["url"])
+
         results[topic["name"]] = top
         print(f"    Selected {len(top)} articles")
+
     return results
