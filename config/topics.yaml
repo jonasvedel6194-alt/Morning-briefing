@@ -1,18 +1,36 @@
 topics:
   - name: "Renewable Energy — Northern Europe"
-    description: "Renewable energy, wind power, solar, offshore wind, hydrogen, energy storage,
-      power grids, electricity prices, energy transition and green policy specifically in
-      Denmark, Sweden, Norway, Finland, Germany, the Netherlands, UK and the EU. Exclude
-      stories unrelated to Northern Europe or the European energy market."
+    description: "ONLY include articles specifically about: renewable energy, wind power, offshore
+      wind, solar, hydrogen, energy storage, power grids, electricity prices, energy transition,
+      green energy policy, energy markets in Denmark, Sweden, Norway, Finland, Germany, Netherlands,
+      UK or the EU. Do NOT include general climate change, environment, nature, wildlife, space,
+      or any non-energy stories. Be very strict — if it is not directly about energy production,
+      energy infrastructure or energy markets it scores 0."
     max_articles: 6
     tag_color: "green"
 
-  - name: "Business & Industry"
-    description: "Corporate earnings, strategy, mergers, acquisitions and major business news
-      across four sectors: (1) Energy companies — oil, gas, utilities, renewables majors;
-      (2) Technology — semiconductors, AI chips, Nvidia, TSMC, Intel, AMD, Microsoft, Google,
-      Apple, big tech earnings; (3) Pharma & biotech — drug approvals, clinical trials, major
-      pharma companies like Novo Nordisk, Pfizer, Roche, AstraZeneca; (4) Defence & aerospace —
-      defence spending, contracts, major defence companies, NATO procurement, European rearmament."
-    max_articles: 8
+  - name: "Technology & Semiconductors"
+    description: "ONLY include articles specifically about: semiconductors, AI chips, Nvidia,
+      TSMC, Intel, AMD, ASML, Qualcomm, big tech earnings (Microsoft, Google, Apple, Meta,
+      Amazon), AI hardware, data centres, chip manufacturing. Do NOT include defence, pharma,
+      energy or general business. Be very strict — if it is not directly about tech companies
+      or semiconductors it scores 0."
+    max_articles: 4
     tag_color: "blue"
+
+  - name: "Pharma & Biotech"
+    description: "ONLY include articles specifically about: pharmaceutical companies, drug
+      approvals, clinical trials, biotech, Novo Nordisk, Pfizer, Roche, AstraZeneca, Eli Lilly,
+      FDA or EMA decisions, medical treatments. Do NOT include defence, energy, tech or general
+      business. Be very strict — if it is not directly about pharma or biotech it scores 0."
+    max_articles: 4
+    tag_color: "purple"
+
+  - name: "Defence & Aerospace"
+    description: "ONLY include articles specifically about: defence spending, military contracts,
+      weapons systems, NATO, European rearmament, defence companies like Rheinmetall, BAE Systems,
+      Saab, Thales, Leonardo, defence budgets, aerospace and military procurement. Do NOT include
+      energy, tech, pharma or general business. Be very strict — if it is not directly about
+      defence or aerospace it scores 0."
+    max_articles: 4
+    tag_color: "amber"
