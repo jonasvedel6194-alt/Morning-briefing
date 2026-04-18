@@ -14,7 +14,7 @@ def _score_articles_for_topic(articles, topic):
         for i, a in enumerate(articles)
     )
 
-    prompt = f"""You are a news curator. Score each article for relevance to the topic:
+    prompt = f"""You are a strict news curator. Score each article for relevance to the topic.
 
 TOPIC: {topic['name']}
 DESCRIPTION: {topic['description']}
@@ -23,9 +23,16 @@ ARTICLES:
 {article_list}
 
 Return ONLY a JSON array with one object per article, in order:
-[{{"index": 0, "score": 8, "reason": "directly about renewable energy policy"}}]
+[{{"index": 0, "score": 8, "reason": "directly about offshore wind in Denmark"}}]
 
-Score 0-10. Score 0 if not about this topic at all. Be strict."""
+Scoring rules:
+- Score 9-10: Article is directly and primarily about this topic
+- Score 7-8: Article is clearly about this topic
+- Score 0: Article is not about this topic — even if loosely related
+
+Be very strict. An article about defence spending scores 0 for energy. 
+An article about climate change scores 0 for energy unless it is about energy infrastructure.
+When in doubt, score 0."""
 
     try:
         response = client.messages.create(
@@ -39,7 +46,8 @@ Score 0-10. Score 0 if not about this topic at all. Be strict."""
             if raw.startswith("json"):
                 raw = raw[4:]
         scores = json.loads(raw.strip())
-        return [(articles[s["index"]], s["score"]) for s in scores if s["score"] >= 6]
+        # Raised threshold from 6 to 7 — only clearly relevant articles get through
+        return [(articles[s["index"]], s["score"]) for s in scores if s["score"] >= 7]
     except Exception as e:
         print(f"    Warning: scoring failed for topic '{topic['name']}': {e}")
         return [(a, 5) for a in articles[:topic["max_articles"]]]
