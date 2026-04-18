@@ -1,0 +1,18 @@
+topics:
+  - name: "Renewable Energy — Northern Europe"
+    description: "Renewable energy, wind power, solar, offshore wind, hydrogen, energy storage,
+      power grids, electricity prices, energy transition and green policy specifically in
+      Denmark, Sweden, Norway, Finland, Germany, the Netherlands, UK and the EU. Exclude
+      stories unrelated to Northern Europe or the European energy market."
+    max_articles: 6
+    tag_color: "green"
+
+  - name: "Business & Industry"
+    description: "Corporate earnings, strategy, mergers, acquisitions and major business news
+      across four sectors: (1) Energy companies — oil, gas, utilities, renewables majors;
+      (2) Technology — semiconductors, AI chips, Nvidia, TSMC, Intel, AMD, Microsoft, Google,
+      Apple, big tech earnings; (3) Pharma & biotech — drug approvals, clinical trials, major
+      pharma companies like Novo Nordisk, Pfizer, Roche, AstraZeneca; (4) Defence & aerospace —
+      defence spending, contracts, major defence companies, NATO procurement, European rearmament."
+    max_articles: 8
+    tag_color: "blue"
