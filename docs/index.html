@@ -3,18 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Morning Briefing</title>
+  <title>Morning Briefing — Saturday, 18 April 2026</title>
   <style>
-    body { background: #0a0a0a; color: #888; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-    .msg { text-align: center; }
-    .msg h1 { font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
-    .msg p { font-size: 13px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111;
+      --bg3: #161616;
+      --border: #1e1e1e;
+      --border2: #282828;
+      --text: #e0e0e0;
+      --text2: #888;
+      --text3: #555;
+      --accent: #fff;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.6; min-height: 100vh; }
+
+    /* Masthead */
+    .masthead { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(8px); }
+    .masthead__title { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); }
+    .masthead__right { display: flex; align-items: center; gap: 20px; }
+    .masthead__date { font-size: 12px; color: var(--text2); }
+    .masthead__count { font-size: 11px; color: var(--text3); background: var(--bg3); border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; }
+
+    /* Nav */
+    .nav { padding: 0 32px; border-bottom: 1px solid var(--border); display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav__pill { background: none; border: none; border-bottom: 2px solid transparent; color: var(--text3); font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; padding: 12px 16px; cursor: pointer; white-space: nowrap; transition: color 0.15s, border-color 0.15s; }
+    .nav__pill:hover { color: var(--text); }
+    .nav__pill--active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* Content */
+    .content { max-width: 1100px; margin: 0 auto; padding: 32px; }
+
+    /* Section */
+    .section { margin-bottom: 48px; }
+    .section__header { display: flex; align-items: baseline; justify-content: space-between; padding-left: 12px; margin-bottom: 16px; }
+    .section__title { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); }
+    .section__count { font-size: 11px; color: var(--text3); }
+
+    /* Grid */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    /* Cards */
+    .card { display: block; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-decoration: none; color: inherit; transition: border-color 0.15s, background 0.15s; cursor: pointer; }
+    .card:hover { border-color: var(--border2); background: var(--bg3); }
+    .card--featured { grid-column: 1 / -1; background: var(--bg3); border-color: var(--border2); }
+    .card--featured .card__title { font-size: 16px; }
+    .card--featured .card__body { font-size: 13px; color: var(--text2); -webkit-line-clamp: 6; }
+    .card__source { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .card__title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 8px; }
+    .card__body { font-size: 12px; color: var(--text3); line-height: 1.65; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+    .card__tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.3px; }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--border); padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 32px; }
+    .footer span { font-size: 11px; color: var(--text3); }
+
+    /* Hidden */
+    .section--hidden { display: none; }
+
+    @media (max-width: 768px) {
+      .masthead, .nav, .content, .footer { padding-left: 16px; padding-right: 16px; }
+      .grid { grid-template-columns: 1fr; }
+      .card--featured { grid-column: 1; }
+    }
   </style>
 </head>
 <body>
-  <div class="msg">
-    <h1>Morning Briefing</h1>
-    <p>Your first digest will appear here after the next scheduled run.</p>
-  </div>
+  <header class="masthead">
+    <span class="masthead__title">Morning Briefing</span>
+    <div class="masthead__right">
+      <span class="masthead__date">Saturday, 18 April 2026 &nbsp;·&nbsp; 21:09 UTC</span>
+      <span class="masthead__count">14 stories</span>
+    </div>
+  </header>
+
+  <nav class="nav"><button class="nav__pill nav__pill--active" onclick="filterTopic('all', this)">All</button><button class="nav__pill" onclick="filterTopic('renewable-energy-—-northern-europe', this)">Renewable Energy — Northern Europe</button><button class="nav__pill" onclick="filterTopic('business-and-industry', this)">Business & Industry</button></nav>
+
+  <main class="content">
+        <section class="section" id="renewable-energy-—-northern-europe">
+          <div class="section__header" style="border-left:3px solid #4caf7d;">
+            <span class="section__title">Renewable Energy — Northern Europe</span>
+            <span class="section__count">6 stories</span>
+          </div>
+          <div class="grid">
+            <a class="card card--featured" href="https://www.bloomberg.com/news/newsletters/2026-04-18/in-florida-the-pentagon-is-still-preparing-key-base-for-climate-change" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">The US Defense Department Is Still Preparing for Climate Change</div>
+              <div class="card__body">The military might not be talking about climate anymore, but it’s still working to be ready for it.</div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a>
+            <a class="card " href="https://www.bloomberg.com/news/articles/2026-04-18/china-clean-tech-exports-jump-amid-global-energy-disruption" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">China Clean Tech Exports Jump Amid Global Energy Disruption</div>
+              <div class="card__body">China’s exports of clean technology climbed in March, reinforcing signs that manufacturers are benefiting from rising global demand for alternative energy sources as traditional supplies are roiled by the Iran war.</div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a>
+            <a class="card " href="https://www.bloomberg.com/news/articles/2026-04-17/imf-warns-suspending-eu-carbon-market-comes-with-huge-risks" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">IMF Warns Suspending EU Carbon Market Comes With Huge Risks</div>
+              <div class="card__body">The International Monetary Fund urged the European Union not to pause its emissions trading system, warning it would come with “huge” risks that might jeopardize investment.</div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/world/2026/apr/18/venice-flood-barrier-plan-b-rising-sea-level" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">‘We can’t wait’: Venice already seeking floods plan B five years after barriers’ launch</div>
+              <div class="card__body"><p>Rising sea levels and ecological damage caused by heavy use of flood defence system force city authorities to consider next move</p><p>The Arsenale, the colossal shipyard that was the engine of the Venetian Republic’s domination for seven centuries, remains the nucleus of the city’s control over the water. Its northern section is made up of cavernous brick warehouses called <em>capannoni</em>, </div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/news/2026/apr/18/six-great-reads-iran-social-media-memes-abandoned-department-store-cherry-blossoms" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">Six great reads: Iran’s social media memes, an abandoned department store and a 1,200-year-old record of cherry blossoms</div>
+              <div class="card__body"><p>Need something brilliant to read this weekend? Here are six of our favourite pieces from the last seven days</p> <a href="https://www.theguardian.com/news/2026/apr/18/six-great-reads-iran-social-media-memes-abandoned-department-store-cherry-blossoms">Continue reading...</a></div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/environment/2026/apr/18/a-prickle-of-hedgehogs-and-an-armada-of-newts-wildlife-settles-in-at-londons-new-queen-elizabeth-garden" target="_blank" rel="noopener" data-topic="renewable-energy-—-northern-europe">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">A prickle of hedgehogs and an armada of newts: wildlife settles in at London’s new Queen Elizabeth garden</div>
+              <div class="card__body"><p>A former horticultural nursery in Regent’s Park has been transformed into a diverse mix of habitats, with a wide range of species already spotted ahead of its opening to the public on April 27</p><p>When the <a href="https://www.royalparks.org.uk/visit/parks/regents-park-primrose-hill/queen-elizabeth-ii-garden">Queen Elizabeth II garden</a> opens in Regent’s Park this month, the first people to</div>
+              <div class="card__tag" style="background:#1a2e1a;color:#4caf7d;">Renewable Energy — Northern Europe</div>
+            </a></div>
+        </section>
+        <section class="section" id="business-and-industry">
+          <div class="section__header" style="border-left:3px solid #5b8adb;">
+            <span class="section__title">Business & Industry</span>
+            <span class="section__count">8 stories</span>
+          </div>
+          <div class="grid">
+            <a class="card card--featured" href="https://www.bloomberg.com/news/newsletters/2026-04-18/in-florida-the-pentagon-is-still-preparing-key-base-for-climate-change" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">The US Defense Department Is Still Preparing for Climate Change</div>
+              <div class="card__body">The military might not be talking about climate anymore, but it’s still working to be ready for it.</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.bloomberg.com/news/articles/2026-04-18/china-clean-tech-exports-jump-amid-global-energy-disruption" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">China Clean Tech Exports Jump Amid Global Energy Disruption</div>
+              <div class="card__body">China’s exports of clean technology climbed in March, reinforcing signs that manufacturers are benefiting from rising global demand for alternative energy sources as traditional supplies are roiled by the Iran war.</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.bloomberg.com/news/articles/2026-04-17/imf-warns-suspending-eu-carbon-market-comes-with-huge-risks" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">Bloomberg Green</div>
+              <div class="card__title">IMF Warns Suspending EU Carbon Market Comes With Huge Risks</div>
+              <div class="card__body">The International Monetary Fund urged the European Union not to pause its emissions trading system, warning it would come with “huge” risks that might jeopardize investment.</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/world/2026/apr/18/venice-flood-barrier-plan-b-rising-sea-level" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">‘We can’t wait’: Venice already seeking floods plan B five years after barriers’ launch</div>
+              <div class="card__body"><p>Rising sea levels and ecological damage caused by heavy use of flood defence system force city authorities to consider next move</p><p>The Arsenale, the colossal shipyard that was the engine of the Venetian Republic’s domination for seven centuries, remains the nucleus of the city’s control over the water. Its northern section is made up of cavernous brick warehouses called <em>capannoni</em>, </div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/news/2026/apr/18/six-great-reads-iran-social-media-memes-abandoned-department-store-cherry-blossoms" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">Six great reads: Iran’s social media memes, an abandoned department store and a 1,200-year-old record of cherry blossoms</div>
+              <div class="card__body"><p>Need something brilliant to read this weekend? Here are six of our favourite pieces from the last seven days</p> <a href="https://www.theguardian.com/news/2026/apr/18/six-great-reads-iran-social-media-memes-abandoned-department-store-cherry-blossoms">Continue reading...</a></div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/environment/2026/apr/18/a-prickle-of-hedgehogs-and-an-armada-of-newts-wildlife-settles-in-at-londons-new-queen-elizabeth-garden" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">A prickle of hedgehogs and an armada of newts: wildlife settles in at London’s new Queen Elizabeth garden</div>
+              <div class="card__body"><p>A former horticultural nursery in Regent’s Park has been transformed into a diverse mix of habitats, with a wide range of species already spotted ahead of its opening to the public on April 27</p><p>When the <a href="https://www.royalparks.org.uk/visit/parks/regents-park-primrose-hill/queen-elizabeth-ii-garden">Queen Elizabeth II garden</a> opens in Regent’s Park this month, the first people to</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/environment/2026/apr/18/stranded-dying-german-whale-troubled-relationship-sea-timmy" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">Stranded and dying, the German whale is a parable of our troubled relationship with these sea giants</div>
+              <div class="card__body"><p>Even as we empathise with these intelligent animals, our relentless push for resources kills them in their thousands, just as whalers once hunted them to the brink of extinction</p><p>For weeks now, a humpback whale has been trying to die. Entangled in ropes, it had <a href="https://www.theguardian.com/world/2026/mar/29/hope-running-low-for-humpback-whale-stranded-off-german-coast">wandered int</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a>
+            <a class="card " href="https://www.theguardian.com/commentisfree/2026/apr/19/birdwatching-hobby-pokemon-generation" target="_blank" rel="noopener" data-topic="business-and-industry">
+              <div class="card__source">The Guardian Environment</div>
+              <div class="card__title">I adored Pokémon as a child. Now I collect critters of a different kind in a hobby I’m uniquely suited to – birdwatching  | Jayce Carrano</div>
+              <div class="card__body"><p>Every player has experienced that fierce loyalty to one pocket monster or another. The same is true here</p><p>The Pokémon franchise has turned 30, which means that it’s been a long time since a childhood friend and I braved Pokémon Blue’s haunted Lavender Town together – solemnly handing the Game Boy back and forth in the first (and perhaps last) documented case of two only children sharing so</div>
+              <div class="card__tag" style="background:#1a1f2e;color:#5b8adb;">Business & Industry</div>
+            </a></div>
+        </section></main>
+
+  <footer class="footer">
+    <span>Curated by Claude · Powered by Anthropic</span>
+    <span>Updated 21:09 UTC</span>
+  </footer>
+
+  <script>
+    function filterTopic(slug, btn) {
+      document.querySelectorAll('.nav__pill').forEach(p => p.classList.remove('nav__pill--active'));
+      btn.classList.add('nav__pill--active');
+      document.querySelectorAll('.section').forEach(s => {
+        if (slug === 'all' || s.id === slug) {
+          s.classList.remove('section--hidden');
+        } else {
+          s.classList.add('section--hidden');
+        }
+      });
+    }
+  </script>
 </body>
 </html>
